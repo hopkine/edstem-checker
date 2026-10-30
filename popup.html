@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BetterEd Archive</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body class="theme-light">
+    <header class="popup-header">
+      <div class="popup-header-text">
+        <h1>BetterEd</h1>
+        <p class="popup-subtitle">Archive</p>
+      </div>
+      <button
+        type="button"
+        id="clear-archive"
+        class="clear-archive-btn"
+        hidden
+      >
+        Clear
+      </button>
+    </header>
+    <div id="archive-list" class="archive-list discuss-list-view"></div>
+    <p id="empty-state" class="empty-state" hidden>No archived posts yet.</p>
+    <script src="archive-utils.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,278 @@
+* {
+  box-sizing: border-box;
+}
+
+.theme-light {
+  --page-bg: #ffffff;
+  --page-bg2: #f8f8f8;
+  --text-body: #222222;
+  --text-body2: #666666;
+  --text-lightest: #888888;
+  --text-accent: #1e3d63;
+  --link: #0064c8;
+  --danger-fg: #cc0000;
+  --control-border: rgba(0, 0, 0, 0.094);
+  --control-border-weak: rgba(0, 0, 0, 0.063);
+  --selection-fainter: rgba(0, 98, 251, 0.06);
+  --discuss-feed-thread-icon-fg: #888888;
+  --discuss-feed-thread-count-icon-fg: #cccccc;
+  --discuss-feed-thread-bg-hover: rgba(0, 98, 251, 0.06);
+  --discuss-like-fg: #0064c8;
+  --focus-outline-width: 2px;
+  --focus-outline-color: #007fff;
+  --focus-outline-offset: 1px;
+}
+
+body {
+  margin: 0;
+  width: 360px;
+  max-height: 520px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Open Sans", Arial,
+    sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-body);
+  background: var(--page-bg);
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--control-border);
+  background: var(--page-bg2);
+}
+
+.popup-header-text {
+  min-width: 0;
+}
+
+.popup-header h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-accent);
+  letter-spacing: -0.01em;
+}
+
+.popup-subtitle {
+  margin: 2px 0 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-lightest);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.clear-archive-btn {
+  flex: 0 0 auto;
+  padding: 4px 10px;
+  border: 1px solid var(--control-border);
+  border-radius: 4px;
+  background: var(--page-bg);
+  color: var(--text-accent);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.clear-archive-btn:hover {
+  background: #eef4fb;
+}
+
+.clear-archive-btn:active {
+  transform: scale(0.97);
+}
+
+.archive-list {
+  max-height: 460px;
+  overflow-y: auto;
+  padding: 5px 0;
+}
+
+/* EdStem discuss list row chrome */
+.arch-dlv-item {
+  margin: 0 5px;
+  border-radius: 8px;
+}
+
+.arch-dlv-item + .arch-dlv-item::before {
+  content: "";
+  display: block;
+  height: 1px;
+  margin-left: 15px;
+  margin-right: 5px;
+  background-color: var(--control-border-weak);
+}
+
+.arch-dlv-item:hover {
+  background-color: var(--discuss-feed-thread-bg-hover);
+}
+
+/* EdStem discuss-feed-thread layout */
+.arch-thread.discuss-feed-thread {
+  --pad: 12px;
+  --row-gap: 8px;
+  display: block;
+  padding: var(--pad) 0;
+  font-size: 85%;
+  color: inherit;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.arch-thread .dft-header {
+  color: var(--danger-fg);
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+  font-size: 85%;
+  font-weight: 600;
+  margin-bottom: var(--row-gap);
+}
+
+.arch-thread .dft-body {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--pad);
+  min-width: 0;
+}
+
+.arch-thread .icon.dft-type-icon {
+  flex: 0 0 auto;
+  stroke: none;
+  fill: var(--discuss-feed-thread-icon-fg);
+  margin-right: 10px;
+  font-size: 110%;
+  line-height: 0;
+}
+
+.arch-thread .icon.dft-type-icon svg {
+  display: block;
+  width: 1em;
+  height: 1em;
+}
+
+.arch-thread .dft-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-weight: 600;
+  color: var(--text-body);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.arch-thread .dft-foot {
+  display: flex;
+  align-items: center;
+  font-size: 80%;
+  margin: var(--row-gap) 0 0 0;
+  padding: 0 var(--pad);
+  white-space: nowrap;
+  overflow: hidden;
+  color: var(--text-body2);
+}
+
+.arch-thread .dft-foot-fill {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.arch-thread .dft-user {
+  flex: 0 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 10px;
+}
+
+.arch-thread .dft-foot-fill > .dft-user:first-child {
+  margin-left: 0;
+}
+
+.arch-thread .user-role-label.dft-user-role {
+  font-size: 70%;
+  margin-left: 5px;
+  color: var(--text-lightest);
+}
+
+.arch-thread .dft-date {
+  margin-left: 10px;
+  color: var(--text-lightest);
+}
+
+.arch-thread .discuss-category-text.dft-category {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 10px;
+  color: var(--text-lightest);
+}
+
+.arch-thread .icon.dft-count-icon {
+  stroke: none;
+  fill: var(--discuss-feed-thread-count-icon-fg);
+  margin: 0 5px 0 10px;
+  font-size: 90%;
+  line-height: 0;
+}
+
+.arch-thread .icon.dft-count-icon.active {
+  fill: var(--discuss-like-fg);
+}
+
+.arch-thread .icon.dft-count-icon svg {
+  display: block;
+  width: 1em;
+  height: 1em;
+}
+
+.arch-thread .dft-count {
+  font-size: 90%;
+  color: var(--text-lightest);
+}
+
+.arch-thread .dft-count.active {
+  color: var(--discuss-like-fg);
+}
+
+.arch-restore-btn {
+  flex: 0 0 auto;
+  align-self: center;
+  margin-left: auto;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-lightest);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.arch-restore-btn:hover {
+  color: #b42318;
+  background: #fef3f2;
+}
+
+.arch-thread:focus-visible {
+  outline: var(--focus-outline-width) solid var(--focus-outline-color);
+  outline-offset: calc(-1 * var(--focus-outline-width));
+}
+
+.empty-state {
+  margin: 0;
+  padding: 24px 14px;
+  text-align: center;
+  color: var(--text-body2);
+  font-size: 13px;
+}

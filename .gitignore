@@ -1,0 +1,5 @@
+.DS_Store
+
+# Downloaded EdStem stylesheet bundles, not part of the extension
+/[0-9]*.css
+app.*.css

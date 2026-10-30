@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "BetterEd",
+  "version": "1.0",
+  "permissions": ["storage"],
+  "host_permissions": ["https://edstem.org/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "BetterEd Archive"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://edstem.org/*"],
+      "js": ["archive-utils.js", "content.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}
