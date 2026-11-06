@@ -1,0 +1,14 @@
+{
+  "name": "bettered",
+  "private": true,
+  "version": "1.1.0",
+  "description": "Chrome extension that archives Ed Discussion threads locally.",
+  "scripts": {
+    "check": "node --check archive-utils.js && node --check feed-dom.js && node --check content.js && node --check popup.js",
+    "test": "npm run check && node --test test/*.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0",
+    "puppeteer-core": "^24.29.0"
+  }
+}

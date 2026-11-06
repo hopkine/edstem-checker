@@ -10,7 +10,7 @@
     <header class="popup-header">
       <div class="popup-header-text">
         <h1>BetterEd</h1>
-        <p class="popup-subtitle">Archive</p>
+        <p id="archive-count" class="popup-subtitle">Saved on this browser</p>
       </div>
       <button
         type="button"
@@ -22,8 +22,14 @@
       </button>
     </header>
     <div id="archive-list" class="archive-list discuss-list-view"></div>
-    <p id="empty-state" class="empty-state" hidden>No archived posts yet.</p>
+    <p id="empty-state" class="empty-state" hidden>
+      No archived threads yet. On a course feed, click the archive icon or press E.
+    </p>
+    <p id="storage-error" class="storage-error" hidden>
+      Could not read the local archive.
+    </p>
     <script src="archive-utils.js"></script>
+    <script src="feed-dom.js"></script>
     <script src="popup.js"></script>
   </body>
 </html>

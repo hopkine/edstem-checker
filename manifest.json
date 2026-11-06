@@ -1,18 +1,30 @@
 {
   "manifest_version": 3,
   "name": "BetterEd",
-  "version": "1.0",
+  "version": "1.1.0",
+  "description": "Archive Ed Discussion threads on this browser and pin threads to the top of the feed.",
   "permissions": ["storage"],
   "host_permissions": ["https://edstem.org/*"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "BetterEd Archive"
+    "default_title": "BetterEd Archive",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
   },
   "content_scripts": [
     {
       "matches": ["https://edstem.org/*"],
-      "js": ["archive-utils.js", "content.js"],
-      "css": ["styles.css"]
+      "js": ["archive-utils.js", "feed-dom.js", "content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
     }
   ]
 }

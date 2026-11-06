@@ -1,4 +1,4 @@
-function enqueueArchiveWrite(mutator) {
+function popupEnqueueArchiveWrite(mutator) {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get(["archive"], (res) => {
       if (chrome.runtime.lastError) {
@@ -26,7 +26,7 @@ function enqueueArchiveWrite(mutator) {
 
 function removeArchiveItem(item) {
   const targetId = canonicalPostId(item.id);
-  return enqueueArchiveWrite((archive) => {
+  return popupEnqueueArchiveWrite((archive) => {
     const next = removeArchiveEntry(archive, targetId);
     for (const k of Object.keys(archive)) delete archive[k];
     Object.assign(archive, next);
@@ -54,11 +54,12 @@ function createArchiveRow(item) {
   const body = document.createElement("div");
   body.className = "dft-body";
 
-  if (item.typeIconSvg) {
+  const typeSvg = sanitizeIconSvg(item.typeIconSvg);
+  if (typeSvg) {
     const typeIcon = document.createElement("span");
     typeIcon.className = "icon dft-type-icon";
     typeIcon.setAttribute("aria-hidden", "true");
-    typeIcon.innerHTML = item.typeIconSvg;
+    typeIcon.innerHTML = typeSvg;
     body.appendChild(typeIcon);
   }
 
@@ -108,7 +109,8 @@ function createArchiveRow(item) {
     const icon = document.createElement("span");
     icon.className = "icon dft-count-icon" + (active ? " active" : "");
     icon.setAttribute("aria-hidden", "true");
-    if (iconSvg) icon.innerHTML = iconSvg;
+    const countSvg = sanitizeIconSvg(iconSvg);
+    if (countSvg) icon.innerHTML = countSvg;
     foot.appendChild(icon);
 
     const count = document.createElement("span");
@@ -164,6 +166,16 @@ function renderArchive() {
     renderArchiveTimer = null;
 
     chrome.storage.local.get(["archive"], (res) => {
+      const error = document.getElementById("storage-error");
+      if (chrome.runtime.lastError) {
+        if (error) {
+          error.hidden = false;
+          error.textContent = "Could not read the local archive.";
+        }
+        return;
+      }
+      if (error) error.hidden = true;
+
       const items = listArchiveItems(res.archive || {});
       const renderKey = items
         .map((item) => `${item.id}:${item.archivedAt ?? item.time ?? 0}`)
@@ -171,8 +183,14 @@ function renderArchive() {
       const list = document.getElementById("archive-list");
       const empty = document.getElementById("empty-state");
       const clearBtn = document.getElementById("clear-archive");
+      const count = document.getElementById("archive-count");
 
       if (clearBtn) clearBtn.hidden = items.length === 0;
+      if (count) {
+        count.textContent = items.length
+          ? `${items.length} saved on this browser`
+          : "Saved on this browser";
+      }
 
       if (!items.length) {
         list.innerHTML = "";
@@ -200,7 +218,7 @@ document.getElementById("clear-archive").onclick = () => {
   chrome.storage.local.get(["archive"], (res) => {
     const archive = normalizeArchive(res.archive || {});
     if (!Object.keys(archive).length) return;
-    if (!confirm("Restore all archived posts to the feed?")) return;
+    if (!confirm("Restore all archived threads to the feed?")) return;
 
     chrome.storage.local.set({ archive: {} }, () => {
       if (chrome.runtime.lastError) return;

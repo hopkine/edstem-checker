@@ -269,10 +269,44 @@ body {
   outline-offset: calc(-1 * var(--focus-outline-width));
 }
 
-.empty-state {
+.empty-state,
+.storage-error {
   margin: 0;
   padding: 24px 14px;
   text-align: center;
   color: var(--text-body2);
   font-size: 13px;
+}
+
+.storage-error {
+  color: var(--danger-fg);
+}
+
+@media (prefers-color-scheme: dark) {
+  .theme-light {
+    --page-bg: #1c1b22;
+    --page-bg2: #26252d;
+    --text-body: #f2f2f2;
+    --text-body2: #c6c6c6;
+    --text-lightest: #9a9aa3;
+    --text-accent: #d6e4f5;
+    --link: #8eb7ef;
+    --danger-fg: #ff8d8d;
+    --control-border: rgba(255, 255, 255, 0.12);
+    --control-border-weak: rgba(255, 255, 255, 0.08);
+    --selection-fainter: rgba(120, 170, 255, 0.12);
+    --discuss-feed-thread-icon-fg: #bdbdc7;
+    --discuss-feed-thread-count-icon-fg: #8d8d98;
+    --discuss-feed-thread-bg-hover: rgba(120, 170, 255, 0.12);
+    --discuss-like-fg: #8eb7ef;
+  }
+
+  .clear-archive-btn:hover {
+    background: #303846;
+  }
+
+  .arch-restore-btn:hover {
+    color: #ffb4b4;
+    background: rgba(255, 80, 80, 0.12);
+  }
 }
