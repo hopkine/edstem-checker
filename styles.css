@@ -70,13 +70,14 @@
   color: var(--text-body2, #444);
 }
 
-.ed-archiving {
+.discuss-feed-thread[data-ed-archiving="1"] {
   opacity: 0;
-  transform: translateX(-40px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateX(-24px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.discuss-feed-thread.ed-archived-hidden {
+.dlv-item[data-ed-archived="1"],
+.discuss-feed-thread[data-ed-archived="1"] {
   display: none !important;
 }
 

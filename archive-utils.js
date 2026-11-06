@@ -65,7 +65,7 @@ function upsertArchiveEntry(archive, data) {
     ...(existing || {}),
     ...data,
     id: data.id,
-    archivedAt: existing?.archivedAt ?? Date.now()
+    archivedAt: existing?.archivedAt || Number(data.archivedAt) || Date.now()
   };
   return normalized;
 }
@@ -74,4 +74,14 @@ function removeArchiveEntry(archive, targetId) {
   const normalized = normalizeArchive(archive);
   delete normalized[targetId];
   return normalized;
+}
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    canonicalPostId,
+    normalizeArchive,
+    listArchiveItems,
+    upsertArchiveEntry,
+    removeArchiveEntry
+  };
 }

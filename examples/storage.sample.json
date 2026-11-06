@@ -1,0 +1,20 @@
+{
+  "archive": {
+    "/us/courses/9/discussion/22": {
+      "id": "/us/courses/9/discussion/22",
+      "title": "How does malloc work?",
+      "url": "https://edstem.org/us/courses/9/discussion/22",
+      "header": "",
+      "user": "Ada Lovelace",
+      "userRole": "Student",
+      "date": "2h",
+      "category": "Lectures",
+      "typeIconSvg": "",
+      "counts": [],
+      "archivedAt": 1762387200000
+    }
+  },
+  "pinnedUsers": {
+    "thread:/us/courses/9/discussion/33": 1762387201000
+  }
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BetterEd preview</title>
+    <link rel="stylesheet" href="../popup.css" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="preview.css" />
+  </head>
+  <body class="theme-light preview-page">
+    <main class="preview-layout">
+      <section class="feed-column">
+        <p class="preview-kicker">Local preview</p>
+        <h1>CS 9 discussion</h1>
+        <p class="preview-note">
+          This page imitates an Ed Discussion feed. Archive and pin stay in this
+          browser tab. Nothing is sent to Ed.
+        </p>
+        <div class="feed-shell">
+          <div class="discuss-list-view-container discuss-thread-list dlr-list">
+            <div class="discuss-list-view" aria-label="Thread list">
+              <div class="thread-group" data-group="pinned">
+                <div class="sr-only">Pinned</div>
+                <div class="thread-items">
+                  <div class="dlv-item" id="list-option-11" role="option" aria-selected="false">
+                    <a class="discuss-feed-thread dft-full" href="/us/courses/9/discussion/11">
+                      <div class="dft-header"></div>
+                      <div class="dft-body">
+                        <span class="icon dft-type-icon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" width="14" height="14"><circle cx="12" cy="12" r="8" fill="currentColor"/></svg>
+                        </span>
+                        <span class="dft-title">Staff note</span>
+                        <span class="icon dft-badge pinned">Pinned</span>
+                      </div>
+                      <footer class="dft-foot">
+                        <div class="dft-foot-fill">
+                          <span class="discuss-category-text dft-category">General</span>
+                          <span class="author-name dft-user">Grace Hopper</span>
+                          <span class="dft-user-role">Instructor</span>
+                          <div class="dft-date">1d</div>
+                        </div>
+                        <span class="icon dft-count-icon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M4 5h16v10H7l-3 3z"/></svg>
+                        </span>
+                        <div class="dft-count">4</div>
+                      </footer>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="thread-group" data-group="week">
+                <div class="dtl-group-heading">This week</div>
+                <div class="thread-items">
+                  <div class="dlv-item" id="list-option-22" role="option" aria-selected="true">
+                    <a class="discuss-feed-thread dft-full" href="/us/courses/9/discussion/22">
+                      <div class="dft-header"></div>
+                      <div class="dft-body">
+                        <span class="icon dft-type-icon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" width="14" height="14"><circle cx="12" cy="12" r="8" fill="currentColor"/></svg>
+                        </span>
+                        <span class="dft-title">How does malloc work?</span>
+                      </div>
+                      <footer class="dft-foot">
+                        <div class="dft-foot-fill">
+                          <span class="discuss-category-text dft-category">Lectures</span>
+                          <span class="author-name dft-user">Ada Lovelace</span>
+                          <span class="dft-user-role">Student</span>
+                          <div class="dft-date">2h</div>
+                        </div>
+                        <span class="icon dft-count-icon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M4 5h16v10H7l-3 3z"/></svg>
+                        </span>
+                        <div class="dft-count">3</div>
+                      </footer>
+                    </a>
+                  </div>
+                  <div class="dlv-item" id="list-option-33" role="option" aria-selected="false">
+                    <a class="discuss-feed-thread dft-full" href="/us/courses/9/discussion/33">
+                      <div class="dft-header">Pending approval</div>
+                      <div class="dft-body">
+                        <span class="icon dft-type-icon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" width="14" height="14"><circle cx="12" cy="12" r="8" fill="currentColor"/></svg>
+                        </span>
+                        <span class="dft-title">Lab 2 office hours</span>
+                      </div>
+                      <footer class="dft-foot">
+                        <div class="dft-foot-fill">
+                          <span class="discuss-category-text dft-category">Labs</span>
+                          <span class="author-name dft-user">Alan Turing</span>
+                          <span class="dft-user-role">Student</span>
+                          <div class="dft-date">5h</div>
+                        </div>
+                        <span class="icon dft-count-icon active" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M12 20s-7-4.4-7-9a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 4.6-7 9-7 9z"/></svg>
+                        </span>
+                        <div class="dft-count active">6</div>
+                      </footer>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section class="thread-page">
+          <h2>Open thread</h2>
+          <article class="discuss-thread">
+            <h3 class="disthrb-title">How does malloc work?</h3>
+            <div class="disthrb-user-name">Ada Lovelace</div>
+            <div class="disthrb-role">Student</div>
+            <div class="disthrb-date">2h</div>
+            <div class="disthrb-category">Lectures</div>
+            <div class="disthrb-head-end"></div>
+          </article>
+        </section>
+      </section>
+      <aside class="popup-panel" aria-label="BetterEd archive">
+        <header class="popup-header">
+          <div class="popup-header-text">
+            <h1>BetterEd</h1>
+            <p id="archive-count" class="popup-subtitle">Saved on this browser</p>
+          </div>
+          <button type="button" id="clear-archive" class="clear-archive-btn" hidden>Clear</button>
+        </header>
+        <div id="archive-list" class="archive-list discuss-list-view"></div>
+        <p id="empty-state" class="empty-state" hidden>
+          No archived threads yet. On a course feed, click the archive icon or press E.
+        </p>
+        <p id="storage-error" class="storage-error" hidden>Could not read the local archive.</p>
+      </aside>
+    </main>
+    <script src="chrome-stub.js"></script>
+    <script src="../archive-utils.js"></script>
+    <script src="../feed-dom.js"></script>
+    <script src="../content.js"></script>
+    <script src="../popup.js"></script>
+  </body>
+</html>

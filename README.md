@@ -1,76 +1,90 @@
 # BetterEd
 
-BetterEd is a Chrome extension for EdStem that helps you keep your course discussion feed focused and organized.
+BetterEd is a Chrome extension for [Ed Discussion](https://edstem.org) (EdStem). It hides threads you are finished with, keeps them in a private archive on this browser, and lets you pin threads to the top of the course feed.
 
-It adds lightweight archive tools to EdStem threads so you can hide posts you are not currently interested in, keep them accessible in a local archive, and restore items later with a click.
+The extension does not call the Ed API, does not read an API token, and does not send thread text anywhere. Archive and pin data stay in `chrome.storage.local` on your Chrome profile.
 
-## Features
+## Install
 
-- Archive discussion posts from the feed with one click or the keyboard shortcut `E`
-- Restore archived posts back to the feed from the extension popup
-- Keep a local archive of archived posts in browser storage
-- Pin important threads or authors using the extension context menu
-- Lightweight UI that blends into the EdStem discussion layout
+There is no build step.
 
-## Why use it?
+1. Clone this repository.
+2. Open `chrome://extensions`.
+3. Turn on **Developer mode**.
+4. Choose **Load unpacked** and select this folder (the folder that contains `manifest.json`).
+5. Open a course at `https://edstem.org/...` and refresh the discussion page.
 
-EdStem discussion feeds can get crowded as courses progress. BetterEd helps you:
+Chrome will show the BetterEd icon in the toolbar. Pin it from the extensions menu if you do not see it.
 
-- reduce visual noise in active feeds
-- keep a personal archive of useful discussions
-- revisit old posts without losing them permanently
-- focus on current conversations without clutter
+To confirm the UI before you are logged in, from this folder run:
 
-## Installation
+```bash
+npm install
+npm test
+```
 
-1. Open Chrome and go to `chrome://extensions/`
-2. Enable Developer mode
-3. Click Load unpacked
-4. Select the folder containing this repository
-5. The BetterEd extension will be installed and ready to use on EdStem pages
+`npm test` checks syntax, runs the archive logic against a local copy of the feed markup, and opens `preview/index.html` in headless Chrome. That preview never contacts Ed. You can also open `preview/index.html` in a normal browser and click the archive icons.
 
-## Usage
+## Use it on Ed
 
-### Archive a post
+Works on `https://edstem.org/*`, including `/us`, `/au`, and `/eu` course URLs.
 
-- Click the archive button added to each discussion thread in the feed
-- Or press `E` while a feed item or thread is focused
+### Archive a thread
 
-### View archived posts
+On a course feed, each thread row gets an archive icon at the right of the metadata line.
 
-- Click the BetterEd extension icon in the browser toolbar
-- The popup shows all archived posts
-- Use the Clear button to restore everything back to the feed
+- Click that icon, or
+- Select a thread with the keyboard (Ed marks the row `aria-selected`) and press `E`.
 
-### Restore an item
+The row slides away. Open the BetterEd toolbar popup to see it. Click a saved row to open the thread in a new tab. Click `×` to put that one row back on the feed, or **Clear** to restore every saved thread. Clearing asks you to confirm.
 
-- Open the popup
-- Click the `×` button for the item you want to restore
+On an open thread page (`.../discussion/123`), the header gets **Archive**. Choosing it saves the thread and returns to the feed. If that thread is already archived, the button says **Restore**.
 
-### Pin threads
+`E` does nothing while you are typing in a field.
 
-- Right-click a discussion thread
-- Choose the Pin (extension) option in the context menu
-- Pinned threads are moved to the top section of the feed
+### Pin a thread
 
-## Project structure
+Right-click a feed row. In Ed's menu, choose **Pin thread**. The row moves into the top pinned section and gets a green pin. Choose **Unpin thread** to put it back.
 
-- `content.js` — main extension logic for detecting posts, injecting archive buttons, and archiving/restoring state
-- `archive-utils.js` — archive normalization and storage helpers
-- `popup.html` / `popup.js` — popup UI for browsing and restoring archived posts
-- `manifest.json` — Chrome extension manifest
-- `styles.css` / `popup.css` — styling for the extension UI
+Ed's own staff pins stay in that top section. BetterEd pins are stored only in this browser. If Ed redraws the list, the extension puts your pins back at the top.
 
-## Notes
+Author pins are used only when the row exposes a profile link or `data-user-id`. The current Ed feed does not, so the menu pins the thread.
 
-- The extension stores archive state locally in Chrome storage (`chrome.storage.local`)
-- It targets EdStem pages at `https://edstem.org/*`
-- It is designed as a browser extension utility rather than a standalone web app
+## Configuration
+
+There is nothing to configure and no `.env` file. Do not put an Ed API token in this project; the extension never reads one.
+
+`examples/storage.sample.json` shows the shape of the data Chrome stores. The sample titles are fake. You do not import that file.
+
+| Storage key | Meaning |
+| --- | --- |
+| `archive` | Map of canonical thread paths to the title, author, category, and link shown in the popup |
+| `pinnedUsers` | Map of `thread:<path>` (or `user:<id>` when a profile id is present) to the time it was pinned |
+
+To remove everything, use **Clear** in the popup for the archive, unpin threads from the feed menu, or remove the extension.
+
+## Project layout
+
+- `manifest.json` — Manifest V3 entry
+- `content.js` — watches Ed pages, saves archive and pin changes
+- `feed-dom.js` — reads the current feed markup and updates the page
+- `archive-utils.js` — normalizes stored threads
+- `popup.html`, `popup.js`, `popup.css` — the toolbar archive
+- `styles.css` — archive button, hidden rows, and pin badge on Ed
+- `preview/index.html` — local feed used by the tests and for a dry run
+- `icons/` — toolbar icons
+
+## Checks
+
+```bash
+npm install
+npm test
+```
+
+That requires Node.js and Google Chrome (the end-to-end test uses `/usr/bin/google-chrome-stable`, or `CHROME_PATH` if Chrome lives elsewhere).
+
+The automated feed matches the public Ed Discussion frontend inspected on 6 Nov 2026 (build `08cd2629413f141a`): feed rows are `.discuss-feed-thread` inside `.dlv-item`, pinned threads sit in their own list group, and the right-click menu is `.popup[role="menu"]`. It does **not** sign in to Ed or open a real course. After you load the extension, archive one thread on a course you can access and restore it from the popup before you rely on it.
 
 ## License
 
-This project does not currently include a license file.
-
-## Contributing
-
-Contributions are welcome. Feel free to open an issue or submit a pull request if you have improvements or bug fixes.
+This repository does not include a license file.
